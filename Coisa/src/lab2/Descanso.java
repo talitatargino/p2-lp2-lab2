@@ -1,19 +1,25 @@
 package lab2;
 
 public class Descanso {
-    private int horasDeDescanso;
-    private int numeroDeSemanas;
+    private int horasDeDescanso= 0;
+    private int numeroDeSemanas = 0;
 
-    public void adicionaTempoOnline(int valor){
+    public void defineHorasDescanso(int valor){
         this.horasDeDescanso = valor;
     }
-    public boolean defineNumeroSemanas(int valor){
+    public void defineNumeroSemanas(int valor){
         this.numeroDeSemanas = valor;
     }
     public String getStatusGeral(){
-        String retorno ="";
-        if (horasDeDescanso>=26){
-
+        if (horasDeDescanso ==0 || numeroDeSemanas ==0){
+            return "Cansado";
+        }
+        int tempo = horasDeDescanso/numeroDeSemanas;
+        if (tempo>=26){
+            return "Descansado";
+        }
+        else{
+            return "Cansado";
         }
     }
 }

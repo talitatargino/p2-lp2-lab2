@@ -4,6 +4,9 @@ public class RegistroResumos {
     private int numeroDeResumos;
     private String tema;
     private String conteudo;
+    public RegistroResumos(int numeroDeResumos){
+        this.numeroDeResumos= numeroDeResumos;
+    }
     public void adicionaResumo(String tema, String conteudo){
 
     }
