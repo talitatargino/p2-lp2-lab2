@@ -1,5 +1,5 @@
 package lab2;
-
+import java.util.Arrays;
 public class Disciplina {
     private String nomeDisciplina;
     private double nota1;
@@ -13,7 +13,9 @@ public class Disciplina {
         this.nota2 = 0;
         this.nota3 = 0;
         this.nota4 = 0;
-        this.horas =horas;
+    }
+    public void cadastraHoras (int hora){
+        this.horas = hora;
     }
     public void cadastraNota (int nota, double valorNota){
         if (nota == 1){
@@ -26,7 +28,7 @@ public class Disciplina {
             this.nota3 = valorNota;
         }
         else{
-            this.nota4 = nota4;
+            this.nota4 = valorNota;
         }
     }
     public boolean aprovado(){
@@ -40,6 +42,7 @@ public class Disciplina {
     }
     @Override
     public String toString(){
-        return "Disciplina: "+nomeDisciplina+". Número de horas de estudo: "+horas+ ". Média do aluno: "+ (nota1+nota2+nota3+nota4)/4+ ". Nota 1: "+nota1+". Nota 2: "+nota2+". Nota 3: "+nota3+". Nota 4: "+nota4;
+        double [] notas = {nota1, nota2, nota3, nota4};
+        return nomeDisciplina + " " + horas + " " + (nota1+nota2+nota3+nota4)/4 + " " + Arrays.toString(notas);
     }
 }
