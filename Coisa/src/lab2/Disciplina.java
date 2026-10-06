@@ -2,6 +2,8 @@ package lab2;
 import java.util.Arrays;
 public class Disciplina {
     private String nomeDisciplina;
+    // Um double[4] notas resolveria o problema
+    // depois era so passar indice por indice anexando a nota.
     private double nota1;
     private double nota2;
     private double nota3;

@@ -15,6 +15,12 @@ public class RegistroResumos {
         this.controlaIndice = 0;
 
     }
+
+    //podia ser criado uma classe Resumos
+    // nela, teria os atributos tema e conteudo
+    // na hora de criar, era so instanciar o objeto
+    // mas assim tambem funciona :)
+    // so é um pouco mais dificil de ler e entender
     public void adiciona(String temarecebido, String conteudorecebido){
         for (int i =0; i<numeroDeResumos ;i++){
             if (tema[i] == null ) {
