@@ -57,7 +57,6 @@ public class RegistroResumos {
         }
         return contador;
     }
-
     public String imprimeResumos(){
         String retorno ="";
         retorno +="- Tem "+ conta()+ " resumo (s) cadastrado (s)\n";
