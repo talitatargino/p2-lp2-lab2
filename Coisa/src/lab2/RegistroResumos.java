@@ -1,88 +1,71 @@
 package lab2;
 
 public class RegistroResumos {
-    private int numeroDeResumos;
-    private String [] tema;
-    private String [] conteudo;
+    private Resumo [] resumos;
+    private int contaResumo;
     private int controlaIndice;
-    private String [] resumos;
-
+    private String [] saida;
     public RegistroResumos(int numeroDeResumos){
-        this.numeroDeResumos= numeroDeResumos;
-        this.tema = new String [numeroDeResumos];
-        this.conteudo = new String[numeroDeResumos];
-        this.resumos = new String[numeroDeResumos];
+        this.resumos = new Resumo[numeroDeResumos];
+        this.contaResumo = 0;
         this.controlaIndice = 0;
-
+        this.saida = saida;
     }
-
-    //podia ser criado uma classe Resumos
-    // nela, teria os atributos tema e conteudo
-    // na hora de criar, era so instanciar o objeto
-    // mas assim tambem funciona :)
-    // so é um pouco mais dificil de ler e entender
     public void adiciona(String temarecebido, String conteudorecebido){
-        for (int i =0; i<numeroDeResumos ;i++){
-            if (tema[i] == null ) {
-                break;
-            }
-            if(tema[i].equals(temarecebido)){
+        /*
+        primeiro verifico se existe alguém com o mesmo tema do array
+         */
+        for (int i =0; i<contaResumo;i++){
+            if(resumos[i].getTema().equals(temarecebido) && resumos[i]!=null)
                 return;
-            }
         }
-        tema[controlaIndice] = temarecebido;
-        conteudo[controlaIndice] = conteudorecebido;
+        /*
+        se não houver, eu crio esse resumo
+         */
+        if (resumos[controlaIndice] == null) {
+            resumos[controlaIndice] = new Resumo();
+        }
+        resumos[controlaIndice].setTema(temarecebido);
+        resumos[controlaIndice].setConteudo(conteudorecebido);
         controlaIndice++;
-        if (controlaIndice==numeroDeResumos){
+        if (controlaIndice== resumos.length){
             controlaIndice = 0;
         }
+        if (contaResumo!= resumos.length){
+            contaResumo++;
+        }
     }
 
-    public String[] pegaResumos(){
-        for (int i = 0; i<numeroDeResumos; i++){
-            if (tema[i] == null){
-                return resumos;
-            }
-            resumos [i]= tema[i] + ": " + conteudo[i];
-        }
-        return resumos;
-    }
     public int conta(){
-        int contador = 0;
-        for (int i =0; i<numeroDeResumos;i++){
-            if (tema[i]== null){
-                break;
-            }
-            contador++;
+        return contaResumo;
+    }
+    public String[] pegaResumos(){
+        for (int i = 0; i<contaResumo; i++){
+            saida [i]= resumos[i].getTema() + ": " + resumos[i].getConteudo();
         }
-        return contador;
+        return saida;
     }
     public String imprimeResumos(){
         String retorno ="";
         retorno +="- Tem "+ conta()+ " resumo (s) cadastrado (s)\n";
-        for (int i = 0; i<numeroDeResumos; i++){
-            if (tema[i]==null){
-                break;
-            }
+        for (int i = 0; i<controlaIndice; i++){
             if (i ==0){
                 retorno+="- ";
-            retorno+=tema[i];
+            retorno+=resumos[i].getTema();
             }
             else{
-            retorno += " | "+ tema[i];
+            retorno += " | "+ resumos[i].getTema();
             }
         }
         return retorno;
     }
     public boolean temResumo(String temarecebido){
-        for (int i =0 ;i<numeroDeResumos;i++){
-            if (tema[i] == null){
-                break;
-            }
-            if(temarecebido.equals(tema[i])){
+        for (int i =0 ;i<contaResumo;i++){
+            if(temarecebido.equals(resumos[i].getTema())){
                 return true;
             }
         }
         return false;
     }
-}
+    }
+
