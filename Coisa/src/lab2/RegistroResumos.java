@@ -1,5 +1,5 @@
 package lab2;
-
+import java.util.Arrays;
 public class RegistroResumos {
     /*
     Array que armazena os objetos Resumo
@@ -110,5 +110,23 @@ public class RegistroResumos {
         }
         return false;
     }
+    public String [] busca(String chaveDeBusca){
+        String [] retorno = new String[resumos.length];
+        int aponta = 0;
+        String chaveMinuscula = chaveDeBusca.toLowerCase();
+        for (int i=0 ; i<contaResumo;i++){
+            String [] palavras = resumos[i].getConteudo().split("\\s+");
+            for (String palavra: palavras){
+              if (palavra.toLowerCase().equals(chaveMinuscula)){
+                  retorno[aponta]= resumos[i].getTema();
+                  aponta ++;
+                  break;
+              }
+            }
+        }
+        String[] resultadoFinal = Arrays.copyOf(retorno, aponta);
+        Arrays.sort(resultadoFinal);
+        return resultadoFinal;
     }
+}
 

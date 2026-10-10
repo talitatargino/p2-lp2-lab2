@@ -5,23 +5,26 @@ public class Disciplina {
     private double[] notas;
     private int horas;
     private int [] pesos;
-    private boolean temPesos;
-    private double media;
     public Disciplina (String nomeDisciplina){
         this.nomeDisciplina = nomeDisciplina;
         this.notas = new double[4];
-        this.temPesos = false;
+        this.pesos = new int[4];
+        for (int i=0; i<4; i++){
+            pesos[i] = 1;
+        }
     }
     public Disciplina(String nomeDisciplina, int numeroDeNotas){
         this.nomeDisciplina = nomeDisciplina;
         this.notas = new double[numeroDeNotas];
-        this.temPesos = false;
+        this.pesos = new int[numeroDeNotas];
+        for (int i=0; i<numeroDeNotas; i++){
+            pesos[i] = 1;
+        }
     }
     public Disciplina(String nomeDisciplina, int numeroDeNotas, int [] pesos){
         this.nomeDisciplina = nomeDisciplina;
         this.notas = new double[numeroDeNotas];
-        this.pesos = new int[numeroDeNotas];
-        this.temPesos = true;
+        this.pesos = pesos;
     }
     public void cadastraHoras (int hora){
         this.horas = hora;
@@ -30,21 +33,14 @@ public class Disciplina {
         notas[nota-1]= valorNota;
     }
     public boolean aprovado(){
-        if (!temPesos){
-            for(int i=0; i<notas.length;i++){
-            media+= notas[i];
+        int contaPesos = 0;
+        double somaNotas = 0;
+        double media = 0;
+        for (int i =0; i<notas.length; i++){
+            somaNotas+= (notas[i]*pesos[i]);
+            contaPesos+= pesos[i];
             }
-            media = media/ notas.length;
-        }
-        else{
-            int contaPesos = 0;
-            double somaNotas = 0;
-            for (int i =0; i<notas.length; i++){
-                somaNotas+= (notas[i]*pesos[i]);
-                contaPesos+= pesos[i];
-            }
-            media = somaNotas/contaPesos;
-        }
+        media = somaNotas/contaPesos;
         if (media>=7.0){
             return true;
         }
@@ -54,6 +50,14 @@ public class Disciplina {
     }
     @Override
     public String toString(){
+        double media = 0;
+        int contaPesos = 0;
+        double somaNotas = 0;
+        for (int i =0; i<notas.length; i++){
+            somaNotas+= (notas[i]*pesos[i]);
+            contaPesos+= pesos[i];
+        }
+        media = somaNotas/contaPesos;
         return nomeDisciplina + " " + horas + " " + media + " " + Arrays.toString(notas);
     }
 }
