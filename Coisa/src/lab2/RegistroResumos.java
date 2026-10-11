@@ -1,80 +1,70 @@
 package lab2;
 import java.util.Arrays;
+
+/**
+ * Essa classe representa o registro dos resumos
+ * Todo Registro de Resumos precisa ter um array de resumos.
+ * @author Talita Lima Targino Forte
+ */
 public class RegistroResumos {
-    /*
-    Array que armazena os objetos Resumo
+    /**
+    *Array que armazena os objetos Resumo
      */
     private Resumo [] resumos;
-    /*
-    conta a quantidade de resumos
+    /**
+    *Contador para a quantidade de resumos
      */
     private int contaResumo;
-    /*
-    faz o controle do apontador de índices no qual vou adicionar o próximo resumo
+    /**
+    *Variável que funciona como apontador de índices
      */
     private int controlaIndice;
-    /*
-    o construtor da minha classe 'RegistroResumos' que recebe como parâmetro a quantidade de resumos
+    /**
+    *Constrói um registro de resumos a partir do número de resumos.
+     * Também inicializa as variáveis 'contaResumo' e 'controlaIndice'
      */
     public RegistroResumos(int numeroDeResumos){
-        /*
-        Cria um array de objetos com a capacidade indicada como parâmetro
-         */
         this.resumos = new Resumo[numeroDeResumos];
-        /*
-        percorre todas as posições do array criando um objeto resumo para cada uma dela
-         */
         for (int i = 0; i < resumos.length; i++) {
             resumos[i] = new Resumo();
         }
-        /*
-        Inicializa o 'contaResumo' e 'controlaIndice' como 0 , pois ainda não adicionei nenhum resumo
-         */
         this.contaResumo = 0;
         this.controlaIndice = 0;
     }
-    /*
-    crio a classe 'adiciona' que tem 'temaRecebido' e 'conteudoRecebido' como parâmetros, e vai, através do set, adicionar um resumo ao registo
-     */
 
+    /**
+     * Recebo um resumo e, se não existir outro de mesmo tema, o adiciono no registro
+     * Também atualizo o controle de índice e o contador, se o ressumo for adicionado.
+     * @param temaRecebido o novo tema
+     * @param conteudoRecebido o novo conteudo
+     */
     public void adiciona(String temaRecebido, String conteudoRecebido){
-        /*
-        primeiro verifico se existe alguém com o mesmo tema do array
-         */
         for (int i =0; i<contaResumo;i++){
             if(resumos[i].getTema().equals(temaRecebido))
                 return;
         }
-        /*
-        se não houver, significa que posso adicionar no meu array, faço 2 sets para isso
-         */
         resumos[controlaIndice].setTema(temaRecebido);
         resumos[controlaIndice].setConteudo(conteudoRecebido);
-        /*
-        atualizo meu controle de índice
-         */
         controlaIndice++;
-        /*
-        se o array for preenchido totalmente, o meu controle de índice passa a apontar para o começo
-         */
         if (controlaIndice== resumos.length){
             controlaIndice = 0;
         }
-        /*
-        atualizo a minha variável que contabiliza os resumos
-         */
         if (contaResumo<resumos.length){
             contaResumo++;
         }
     }
-    /*
-    crio a classe conta que retorna o meu contador de resumos
+
+    /**
+     *Retorna o número de resumos.
+     * @return a variável que conta resumos.
      */
     public int conta(){
         return contaResumo;
     }
-    /*
-    crio a classe pegaResumos, que retorna um array contendo tema e conteúdo de cada um deles
+
+    /**
+     * Retorna um array que, para cada resumo, informa índice e conteúdo.
+     * @return o array com as informações de todos os resumos do registro.
      */
     public String[] pegaResumos(){
         String [] saida = new String [contaResumo];
@@ -83,8 +73,10 @@ public class RegistroResumos {
         }
         return saida;
     }
-    /*
-    crio a classe imprimeResumos que retorna uma String dizendo quantos resumos eu tenho cadastrados, e seus temas
+
+    /**
+     * Imprime a quantidade de resumos registrados e os seus temas.
+     * @return uma representação em String dos temas e do número de resumos.
      */
     public String imprimeResumos(){
         String retorno = "- Tem "+ conta()+ " resumo (s) cadastrado (s)\n";
@@ -99,8 +91,11 @@ public class RegistroResumos {
         }
         return retorno;
     }
-    /*
-    crio a classe 'temResumo' que percorre o array e verifica se existe nele algum resumo com o mesmo tema recebido como parâmetro, se houver retorno 'true' e se não houver retorno 'false'
+
+    /**
+     * Verifica se oo resumo de tema recebido no parâmetro já está registrado ou não.
+     * @param temarecebido o tema que vou procurar no registro.
+     * @return true ou false, dependendo se achar ou não esse tema no registro.
      */
     public boolean temResumo(String temarecebido){
         for (int i =0 ;i<contaResumo;i++){
@@ -110,6 +105,12 @@ public class RegistroResumos {
         }
         return false;
     }
+
+    /**
+     * Procura uma palavra no conteúdo dos resumos do registro.
+     * @param chaveDeBusca String que estou buscando.
+     * @return um array de String ordenado, contendo os temas dos resumos em que a palavra existe.
+     */
     public String [] busca(String chaveDeBusca){
         String [] retorno = new String[resumos.length];
         int aponta = 0;

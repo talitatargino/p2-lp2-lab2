@@ -1,5 +1,5 @@
 package lab2;
-import java.util.Arrays;
+
 public class Coisa {
     public static void main(String[] args) {
         registrarDescanso();
@@ -56,9 +56,11 @@ public class Coisa {
 
         String[] resumos = meusResumos.pegaResumos();
 
+
         for (int i = 0; i < meusResumos.conta(); i++) {
             System.out.println(resumos[i]);
         }
+
 
         System.out.println();
         System.out.println("Resumos: ");
